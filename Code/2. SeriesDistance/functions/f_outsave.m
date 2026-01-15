@@ -1,0 +1,6 @@
+%% Save function to avoid a transparency violation during parfor
+function f_outsave (outfile, Qres, obs, sim, segs_obs_opt_all, segs_sim_opt_all, connectors, e_sd_t_all, e_sd_q_all, ...
+                    weight_nfc, weight_rds, weight_sdt, weight_sdv, error_model)
+    save (outfile, 'Qres', 'obs', 'sim', 'segs_obs_opt_all', 'segs_sim_opt_all', 'connectors', 'e_sd_t_all', 'e_sd_q_all', ...
+                   'weight_nfc', 'weight_rds', 'weight_sdt', 'weight_sdv', 'error_model');   
+end
