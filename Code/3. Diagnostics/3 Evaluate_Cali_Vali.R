@@ -203,92 +203,10 @@ p2 <- ggplot(cat.table.tmp1, aes(x=frac)) +
               axis.text.x = element_text(size=10.5, colour = "black"),
               axis.title.y = element_text(size=12, face="bold", colour = "black"),
               axis.text.y = element_text(size=10.5, colour = "black"))
-# 
-# cat.table.tmp.RegTrain <- cat.table.tmp[cat.table.tmp$TRAIN == T, grep("Dist|TRAIN", colnames(cat.table.tmp))]
-# cat.table.tmp.RegTest <- cat.table.tmp[cat.table.tmp$TRAIN == F, grep("Dist|TRAIN", colnames(cat.table.tmp))]
-# cat.table.tmp.RegTrain <- apply(cat.table.tmp.RegTrain, 2, sort)
-# cat.table.tmp.RegTrain <- as.data.frame(cat.table.tmp.RegTrain)
-# cat.table.tmp.RegTrain$frac <- c(1:nrow(cat.table.tmp.RegTrain)) / nrow(cat.table.tmp.RegTrain)
-# 
-# cat.table.tmp.RegTest <- apply(cat.table.tmp.RegTest, 2, sort)
-# cat.table.tmp.RegTest <- as.data.frame(cat.table.tmp.RegTest)
-# cat.table.tmp.RegTest <- cat.table.tmp.RegTest[-c(1:15),]
-# cat.table.tmp.RegTest$frac <- c(1:nrow(cat.table.tmp.RegTest)) / nrow(cat.table.tmp.RegTest)
-# cat.table.tmp2 <- rbind(cat.table.tmp.RegTrain, cat.table.tmp.RegTest)
-# cat.table.tmp2$TRAIN <- as.factor(cat.table.tmp2$TRAIN)
-# 
-# p3 <-  ggplot(cat.table.tmp2, aes(x=frac, group=TRAIN)) +
-#         geom_line(aes(y=Dist_C_Qsim_MEDIAN, color=TRAIN), linetype="solid", linewidth=0.5) + 
-#         scale_color_manual(values=c("#BFB1D0", "#A7C0DE"), labels = c("Training Catchments", "Non-training Catchments")) +
-#         geom_ribbon(aes(ymin=Dist_C_Qsim_MIN, ymax=Dist_C_Qsim_MAX, fill=TRAIN), alpha=0.4) +
-#         scale_fill_manual(values=c("#BFB1D0", "#A7C0DE"), guide = "none") +
-#         coord_flip(ylim=c(0, 1)) +
-#         ylab("Model efficiency score") +
-#         xlab("Fraction of catchments") +
-#         ggtitle("(c) Regionalized Calibration") +
-#         theme(legend.title = element_blank(),
-#               legend.position = c(0.78, 0.09),
-#               legend.text = element_text(colour="black", size=10.5),
-#               axis.title.x = element_text(size=12, face="bold", colour = "black"),
-#               axis.text.x = element_text(size=10.5, colour = "black"),
-#               axis.title.y = element_text(size=12, face="bold", colour = "black"),
-#               axis.text.y = element_text(size=10.5, colour = "black"))
-# 
-# 
-# p4 <-  ggplot(cat.table.tmp2, aes(x=frac, group=TRAIN)) +
-#   geom_line(aes(y=Dist_V_Qsim_MEDIAN, color=TRAIN), linetype="dashed", linewidth=0.5) + 
-#   scale_color_manual(values=c("#BFB1D0", "#A7C0DE"), labels = c("Training Catchments", "Non-training Catchments")) +
-#   geom_ribbon(aes(ymin=Dist_V_Qsim_MIN, ymax=Dist_V_Qsim_MAX, fill=TRAIN), alpha=0.4) +
-#   scale_fill_manual(values=c("#BFB1D0", "#A7C0DE"), guide = "none") +
-#   coord_flip(ylim=c(0, 1)) +
-#   ylab("Model efficiency score") +
-#   xlab("Fraction of catchments") +
-#   ggtitle("(d) Regionalized Validation") +
-#   theme(legend.title = element_blank(),
-#         legend.position = c(0.78, 0.09),
-#         legend.text = element_text(colour="black", size=10.5),
-#         axis.title.x = element_text(size=12, face="bold", colour = "black"),
-#         axis.text.x = element_text(size=10.5, colour = "black"),
-#         axis.title.y = element_text(size=12, face="bold", colour = "black"),
-#         axis.text.y = element_text(size=10.5, colour = "black"))
 
-# p <- plot_grid(p1, p2, p3, p4, ncol=2, nrow=2, align="h")
 p <- plot_grid(p1, p2, ncol=2, nrow=1, align="h")
 
 filename.plot <- paste0(dir_plot, "Cali_Vali.png")
 ggsave(filename=filename.plot, width = 30, height = 12, units = "cm", plot=p)
 
-# 
-# 
-1 - cat.table.tmp1$frac[cat.table.tmp1$Lump_C_Qsim_MEDIAN > 0.5][1]
-1 - cat.table.tmp1$frac[cat.table.tmp1$Lump_C_Qsim_MIN > 0.5][1]
-1 - cat.table.tmp1$frac[cat.table.tmp1$Lump_C_Qsim_MAX > 0.5][1]
-# 
-1 - cat.table.tmp1$frac[cat.table.tmp1$Dist_C_Qsim_MEDIAN > 0.5][1]
-1 - cat.table.tmp1$frac[cat.table.tmp1$Dist_C_Qsim_MIN > 0.5][1]
-1 - cat.table.tmp1$frac[cat.table.tmp1$Dist_C_Qsim_MAX > 0.5][1]
-# 
-1 - cat.table.tmp1$frac[cat.table.tmp1$Lump_V_Qsim_MEDIAN > 0.5][1]
-1 - cat.table.tmp1$frac[cat.table.tmp1$Lump_V_Qsim_MIN > 0.5][1]
-1 - cat.table.tmp1$frac[cat.table.tmp1$Lump_V_Qsim_MAX > 0.5][1]
-# 
-1 - cat.table.tmp1$frac[cat.table.tmp1$Dist_V_Qsim_MEDIAN > 0.5][1]
-1 - cat.table.tmp1$frac[cat.table.tmp1$Dist_V_Qsim_MIN > 0.5][1]
-1 - cat.table.tmp1$frac[cat.table.tmp1$Dist_V_Qsim_MAX > 0.5][1]
-# 
-# 1 - cat.table.tmp.RegTrain$frac[cat.table.tmp.RegTrain$Dist_C_Qsim_MEDIAN > 0.5][1]
-# 1 - cat.table.tmp.RegTrain$frac[cat.table.tmp.RegTrain$Dist_C_Qsim_MIN > 0.5 ][1]
-# 1 - cat.table.tmp.RegTrain$frac[cat.table.tmp.RegTrain$Dist_C_Qsim_MAX > 0.5][1]
-# 
-# 1 - cat.table.tmp.RegTrain$frac[cat.table.tmp.RegTrain$Dist_V_Qsim_MEDIAN > 0.5][1]
-# 1 - cat.table.tmp.RegTrain$frac[cat.table.tmp.RegTrain$Dist_V_Qsim_MIN > 0.5 ][1]
-# 1 - cat.table.tmp.RegTrain$frac[cat.table.tmp.RegTrain$Dist_V_Qsim_MAX > 0.5][1]
-# 
-# 1 - cat.table.tmp.RegTest$frac[cat.table.tmp.RegTest$Dist_C_Qsim_MEDIAN > 0.5][1]
-# 1 - cat.table.tmp.RegTest$frac[cat.table.tmp.RegTest$Dist_C_Qsim_MIN > 0.5 ][1]
-# 1 - cat.table.tmp.RegTest$frac[cat.table.tmp.RegTest$Dist_C_Qsim_MAX > 0.5][1]
-# 
-# 1 - cat.table.tmp.RegTest$frac[cat.table.tmp.RegTest$Dist_V_Qsim_MEDIAN > 0.5][1]
-# 1 - cat.table.tmp.RegTest$frac[cat.table.tmp.RegTest$Dist_V_Qsim_MIN > 0.5 ][1]
-# 1 - cat.table.tmp.RegTest$frac[cat.table.tmp.RegTest$Dist_V_Qsim_MAX > 0.5][1]
 
